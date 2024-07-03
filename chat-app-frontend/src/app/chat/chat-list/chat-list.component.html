@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="chat-list form">
+    <header>Liste de Chats</header>
+    <div *ngIf="chats.length > 0; else noChats">
+      <ul>
+        <li *ngFor="let chat of chats">
+          <span>{{ getUsername(chat) }}</span>
+          <button (click)="goToPrivateChat(chat.id)" class="button">
+            Chat
+          </button>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noChats>
+      <p>Aucun contact trouvé</p>
+    </ng-template>
+    <div class="form-group">
+      <input
+        type="text"
+        [(ngModel)]="newContactUsername"
+        placeholder="Entrez le nom du contact"
+        required
+      />
+      <div class="public-chat-button">
+        <button (click)="createChat()" class="button">Ajouter Chat</button>
+        <button (click)="goToPublicChat()" class="button">Public Chat</button>
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="chat-container">
+  <h2>Chat Public</h2>
+
+  <div class="messages-container" *ngIf="messages.length > 0; else noMessages">
+    <div
+      *ngFor="let message of messages; trackBy: trackById"
+      [ngClass]="{
+        sent: message.senderId === userId,
+        received: message.senderId !== userId
+      }"
+    >
+      <p>{{ message.content }}</p>
+    </div>
+  </div>
+
+  <ng-template #noMessages>
+    <p>Aucun message trouvé</p>
+  </ng-template>
+
+  <div class="input-container">
+    <input [(ngModel)]="newMessage" placeholder="Write a message here" />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+
+  <app-back-button destination="/chats"></app-back-button>
+</div>
